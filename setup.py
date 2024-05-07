@@ -1,7 +1,7 @@
 from setuptools import setup, find_packages
 
 setup(
-  name='FUTURAcommon',
+  name='futuracommon',
   version='0.0.1',
   author='Geogii Danilov',
   author_email='tiazkezo@gmail.com',
