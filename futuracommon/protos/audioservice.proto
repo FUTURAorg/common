@@ -1,0 +1,17 @@
+syntax = "proto3";
+
+package audio;
+
+service AudioStreamer {
+    rpc StreamAudio (stream AudioChunk) returns (StreamStatus);
+}
+
+message AudioChunk {
+    bytes audio_data = 1;
+    string client_id = 2;
+}
+
+message StreamStatus {
+    bool success = 1;
+    string message = 2;
+}

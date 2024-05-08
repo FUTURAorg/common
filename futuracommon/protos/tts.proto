@@ -1,0 +1,29 @@
+syntax = "proto3";
+
+package tts;
+
+
+service TextToSpeech {
+    // Receives text and returns a session ID for audio streaming
+    rpc ProcessText (TextRequest) returns (SessionResponse) {}
+  
+    // Streams audio to the client using the session ID
+    rpc StreamAudio (StreamRequest) returns (stream AudioChunk) {}
+  }
+
+  message TextRequest {
+    string text = 1;
+    string session_id = 2;
+  }
+
+  message SessionResponse {
+    string session_id = 1;
+  }
+
+  message StreamRequest {
+    string session_id = 1;
+  }
+  
+  message AudioChunk {
+    bytes data = 1;
+  }

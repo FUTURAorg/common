@@ -1,0 +1,16 @@
+syntax = "proto3";
+
+package iamgestream;
+
+service ImageStreamService {
+  rpc SendImages(stream ImageData) returns (StreamSummary) {}
+}
+
+message ImageData {
+  bytes image_base64 = 1;  // Encoded image in base64
+  string client_id = 2;
+}
+
+message StreamSummary {
+  int32 total_images_received = 1;
+}
