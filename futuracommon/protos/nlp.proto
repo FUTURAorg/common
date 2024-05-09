@@ -1,0 +1,19 @@
+syntax = "proto3";
+
+package nlp;
+
+service NLPService {
+    // A method to send a notification of a successful action
+    rpc NotifySuccess (SuccessNotification) returns (NotificationResponse);
+}
+
+// The request message containing details about the successful action
+message SuccessNotification {
+    string client_id = 1;
+    int64 timestamp = 3;
+}
+
+// The response message from the server after receiving a notification
+message NotificationResponse {
+    bool acknowledged = 1;  // Whether the notification was successfully received and acknowledged
+}
