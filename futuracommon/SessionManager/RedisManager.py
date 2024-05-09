@@ -7,7 +7,7 @@ from .SessionBaseRepository import BaseSessionRepository
 class RedisSessionManager(BaseSessionRepository):
     
     def __init__(self, redis_address, redis_port, db) -> None:
-        self.__rd = redis.Redis(host=redis_address, port=redis_port, db=db)
+        self.__rd = redis.Redis(host=redis_address, port=redis_port, db=db, decode_responses=True )
     
     def save(self, cliend_id, key, value, ttl=30):
         

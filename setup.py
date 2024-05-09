@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 
 setup(
   name='futuracommon',
-  version='0.0.1',
+  version='0.0.2',
   author='Geogii Danilov',
   author_email='tiazkezo@gmail.com',
   description='Common components for FUTURA project',
