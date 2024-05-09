@@ -17,3 +17,6 @@ class RedisSessionManager(BaseSessionRepository):
     
     def clear(self, cliend_id):
         self.__rd.delete(cliend_id)
+    
+    def get_all(self, client_id):
+        return self.__rd.hgetall(client_id)

@@ -9,3 +9,7 @@ class BaseSessionRepository(metaclass=abc.ABCMeta):
     @abc.abstractmethod
     def clear(self, ):
         pass
+    
+    @abc.abstractmethod
+    def get_all(self, client_id):
+        pass
