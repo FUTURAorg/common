@@ -4,6 +4,7 @@ package iamgestream;
 
 service ImageStreamService {
   rpc SendImages(stream ImageData) returns (StreamSummary) {}
+  rpc SaveFace (SaveFaceRequest) returns (SaveAck) {}
 }
 
 message ImageData {
@@ -13,4 +14,12 @@ message ImageData {
 
 message StreamSummary {
   int32 total_images_received = 1;
+}
+
+message SaveFaceRequest {
+  string client_id = 1;
+}
+
+message SaveAck {
+  bool ack = 1;
 }

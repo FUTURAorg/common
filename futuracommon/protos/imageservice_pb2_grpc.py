@@ -19,12 +19,23 @@ class ImageStreamServiceStub(object):
                 request_serializer=futuracommon_dot_protos_dot_imageservice__pb2.ImageData.SerializeToString,
                 response_deserializer=futuracommon_dot_protos_dot_imageservice__pb2.StreamSummary.FromString,
                 )
+        self.SaveFace = channel.unary_unary(
+                '/iamgestream.ImageStreamService/SaveFace',
+                request_serializer=futuracommon_dot_protos_dot_imageservice__pb2.SaveFaceRequest.SerializeToString,
+                response_deserializer=futuracommon_dot_protos_dot_imageservice__pb2.SaveAck.FromString,
+                )
 
 
 class ImageStreamServiceServicer(object):
     """Missing associated documentation comment in .proto file."""
 
     def SendImages(self, request_iterator, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def SaveFace(self, request, context):
         """Missing associated documentation comment in .proto file."""
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
@@ -37,6 +48,11 @@ def add_ImageStreamServiceServicer_to_server(servicer, server):
                     servicer.SendImages,
                     request_deserializer=futuracommon_dot_protos_dot_imageservice__pb2.ImageData.FromString,
                     response_serializer=futuracommon_dot_protos_dot_imageservice__pb2.StreamSummary.SerializeToString,
+            ),
+            'SaveFace': grpc.unary_unary_rpc_method_handler(
+                    servicer.SaveFace,
+                    request_deserializer=futuracommon_dot_protos_dot_imageservice__pb2.SaveFaceRequest.FromString,
+                    response_serializer=futuracommon_dot_protos_dot_imageservice__pb2.SaveAck.SerializeToString,
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
@@ -62,5 +78,22 @@ class ImageStreamService(object):
         return grpc.experimental.stream_unary(request_iterator, target, '/iamgestream.ImageStreamService/SendImages',
             futuracommon_dot_protos_dot_imageservice__pb2.ImageData.SerializeToString,
             futuracommon_dot_protos_dot_imageservice__pb2.StreamSummary.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def SaveFace(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/iamgestream.ImageStreamService/SaveFace',
+            futuracommon_dot_protos_dot_imageservice__pb2.SaveFaceRequest.SerializeToString,
+            futuracommon_dot_protos_dot_imageservice__pb2.SaveAck.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
