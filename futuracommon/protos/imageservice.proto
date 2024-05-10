@@ -18,6 +18,7 @@ message StreamSummary {
 
 message SaveFaceRequest {
   string client_id = 1;
+  string identity = 2;
 }
 
 message SaveAck {
