@@ -1,0 +1,22 @@
+syntax = "proto3";
+
+package health;
+
+service HealthService {
+    rpc Check(HealthRequest) returns (HealthResponse);
+}
+
+message HealthRequest {
+    string service = 1;
+}
+
+message HealthResponse {
+    enum ServiceStatus {
+        UNKNOWN = 0;  // The serving status is not known.
+        SERVING = 1;  // The service is currently serving.
+        NOT_SERVING = 2;  // The service is not currently serving.
+    }
+
+    ServiceStatus status = 1;
+    string current_backend = 2;
+}
