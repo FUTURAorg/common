@@ -8,7 +8,7 @@ setup(
   description='Common components for FUTURA project',
   url='https://github.com/FUTURAorg',
   packages=find_packages(),
-  install_requires=['grpcio', 'grpcio-tools', 'redis'],
+  install_requires=['grpcio', 'redis'],
   classifiers=[
     'Programming Language :: Python :: 3.11',
     'License :: OSI Approved :: MIT License',
