@@ -4,6 +4,7 @@ package backend;
 
 service BackendService {
     rpc ChangeBackend(BackendConfig) returns (BackendStatus);
+    rpc GetBackendList(Empty) returns (BackendList);
   }
 
 message BackendConfig {
@@ -14,3 +15,9 @@ message BackendStatus {
     bool success = 1;
     string message = 2;
 }
+
+message BackendList {
+    repeated string backends = 1;
+}
+
+message Empty {}

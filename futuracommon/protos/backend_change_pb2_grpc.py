@@ -5,7 +5,7 @@ import warnings
 
 from futuracommon.protos import backend_change_pb2 as futuracommon_dot_protos_dot_backend__change__pb2
 
-GRPC_GENERATED_VERSION = '1.63.0'
+GRPC_GENERATED_VERSION = '1.64.1'
 GRPC_VERSION = grpc.__version__
 EXPECTED_ERROR_RELEASE = '1.65.0'
 SCHEDULED_RELEASE_DATE = 'June 25, 2024'
@@ -44,12 +44,23 @@ class BackendServiceStub(object):
                 request_serializer=futuracommon_dot_protos_dot_backend__change__pb2.BackendConfig.SerializeToString,
                 response_deserializer=futuracommon_dot_protos_dot_backend__change__pb2.BackendStatus.FromString,
                 _registered_method=True)
+        self.GetBackendList = channel.unary_unary(
+                '/backend.BackendService/GetBackendList',
+                request_serializer=futuracommon_dot_protos_dot_backend__change__pb2.Empty.SerializeToString,
+                response_deserializer=futuracommon_dot_protos_dot_backend__change__pb2.BackendList.FromString,
+                _registered_method=True)
 
 
 class BackendServiceServicer(object):
     """Missing associated documentation comment in .proto file."""
 
     def ChangeBackend(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def GetBackendList(self, request, context):
         """Missing associated documentation comment in .proto file."""
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
@@ -63,10 +74,16 @@ def add_BackendServiceServicer_to_server(servicer, server):
                     request_deserializer=futuracommon_dot_protos_dot_backend__change__pb2.BackendConfig.FromString,
                     response_serializer=futuracommon_dot_protos_dot_backend__change__pb2.BackendStatus.SerializeToString,
             ),
+            'GetBackendList': grpc.unary_unary_rpc_method_handler(
+                    servicer.GetBackendList,
+                    request_deserializer=futuracommon_dot_protos_dot_backend__change__pb2.Empty.FromString,
+                    response_serializer=futuracommon_dot_protos_dot_backend__change__pb2.BackendList.SerializeToString,
+            ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
             'backend.BackendService', rpc_method_handlers)
     server.add_generic_rpc_handlers((generic_handler,))
+    server.add_registered_method_handlers('backend.BackendService', rpc_method_handlers)
 
 
  # This class is part of an EXPERIMENTAL API.
@@ -90,6 +107,33 @@ class BackendService(object):
             '/backend.BackendService/ChangeBackend',
             futuracommon_dot_protos_dot_backend__change__pb2.BackendConfig.SerializeToString,
             futuracommon_dot_protos_dot_backend__change__pb2.BackendStatus.FromString,
+            options,
+            channel_credentials,
+            insecure,
+            call_credentials,
+            compression,
+            wait_for_ready,
+            timeout,
+            metadata,
+            _registered_method=True)
+
+    @staticmethod
+    def GetBackendList(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(
+            request,
+            target,
+            '/backend.BackendService/GetBackendList',
+            futuracommon_dot_protos_dot_backend__change__pb2.Empty.SerializeToString,
+            futuracommon_dot_protos_dot_backend__change__pb2.BackendList.FromString,
             options,
             channel_credentials,
             insecure,
